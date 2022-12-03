@@ -1,4 +1,3 @@
--pip install haversine
 import pandas as pd
 import streamlit as st
 import haversine as hs
