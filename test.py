@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[133]:
-
-
 import pandas as pd
 import streamlit as st
 import haversine as hs
@@ -235,9 +229,6 @@ elif Location == "Location 3 - Bangsar":
     my_element = st.subheader("Chart for Count for different types of occupation")
     #set bar chart - occupation
     my_element = st.bar_chart(occup_count, x="Occupation", y="count")
-
-
-# In[ ]:
 
 
 
