@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-pip install haversine
+from math import radians, cos, sin, asin, sqrt
 import haversine as hs
 from streamlit_folium import folium_static
 import folium
@@ -25,14 +25,32 @@ PetalingJaya_Loc = (3.105427, 101.643554)
 #loc 3 - Bangsar
 Bangsar_Loc = (3.131643, 101.669772)
 
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance between two points 
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+
+    # 6367 km is the radius of the Earth
+    km = 6367 * c
+    return km 
+
 #Calculate the distance between the 3 loc and the people
 for ind in df.index:
     target_lat = df.loc[ind, "lat"]
     target_lon = df.loc[ind, "lon"]
     target_loc = (target_lat, target_lon)
-    distance_loc1 = round(hs.haversine(BukitBintang_Loc, target_loc),2)
-    distance_loc2 = round(hs.haversine(PetalingJaya_Loc, target_loc),2)
-    distance_loc3 = round(hs.haversine(Bangsar_Loc, target_loc),2)
+    distance_loc1 = round(haversine(101.705406, 3.147668, target_lon, target_lat),2)
+    distance_loc2 = round(haversine(101.643554, 3.105427, target_lon, target_lat),2)
+    distance_loc3 = round(haversine(101.669772, 3.131643, target_lon, target_lat),2)
     df.loc[ind , "distance_loc1"] = distance_loc1
     df.loc[ind , "distance_loc2"] = distance_loc2
     df.loc[ind , "distance_loc3"] = distance_loc3
