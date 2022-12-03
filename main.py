@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+pip install haversine
 import haversine as hs
 from streamlit_folium import folium_static
 import folium
