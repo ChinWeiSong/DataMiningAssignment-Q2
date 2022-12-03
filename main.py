@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 from math import radians, cos, sin, asin, sqrt
-import haversine as hs
 from streamlit_folium import folium_static
 import folium
 import time
